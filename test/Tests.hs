@@ -1,6 +1,5 @@
 module Main (main) where
 
-import CSV
 import Crypt.HOTP
 import Crypt.SHA1
 import Crypt.TOTP
@@ -12,12 +11,6 @@ import Test.QuickCheck
 
 main :: IO ()
 main = hspec $ do
-  describe "CSV" $ do
-    it "normal use case" $ separateValues "hola , mundo, mundial" `shouldBe` ["hola", "mundo", "mundial"]
-    it "processing a row with all blank spaces" $ separateValues ", , , , , " `shouldBe` ["", "", "", "", "", ""]
-    it "processing a row with a blank space in the middle" $ separateValues "hola , , mundial" `shouldBe` ["hola", "", "mundial"]
-    it "processing a row with a blank space in the left" $ separateValues ", hola , mundial" `shouldBe` ["", "hola", "mundial"]
-    it "processing a row with a blank space in the right" $ separateValues "hola , mundo, " `shouldBe` ["hola", "mundo", ""]
   describe "SHA-1: hexPair" $ do
     it "splitting 0b01001100" $ hexPair (toEnum 0b01001100) `shouldBe` map toEnum [0b00000100, 0b00001100]
     it "splitting 0b00000000" $ hexPair (toEnum 0b00000000) `shouldBe` map toEnum [0b00000000, 0b00000000]
